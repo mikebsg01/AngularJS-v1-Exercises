@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="MyFirstApp">
+<head>
+  <meta charset="utf-8">
+  <title>First Controller</title>
+  <script type="text/javascript" src="angular.js"></script>
+  <script type="text/javascript" src="controllers.js"></script>
+</head>
+<body ng-controller="FirstController">
+<h1>{{ "Hello " + name }}</h1>
+<br/>
+<input type="text" ng-model="newComment.username">
+<br>
+<textarea ng-model="newComment.comment"></textarea>
+<br/>
+<button ng-click="addComment()">Agregar comentario</button>
+<br/>
+<ul>
+    <li ng-repeat="comment in comments">
+      <p>{{ comment.comment }}</p>
+      <small>{{ comment.username }}</small>
+    </li>
+</ul>
+</body>
+</html>
