@@ -1,26 +1,18 @@
-var app = angular.module('ToDoList', ['LocalStorageModule'])
+var app = angular.module('mainModule', [])
 
-app.controller('ToDoController', [
-  '$scope', 'localStorageService',
-  function($scope, localStorageService) {
-    $scope.all = [];
-    $scope.newActivity = {}
+app.filter('removeHTML', function() {
+  return function(text) {
+    return String(text).replace(/<[^>]+>/gm, '')
+  }
+})
 
-    if (localStorageService.get('todolist')) {
-      $scope.all = localStorageService.get('todolist')
-    }
-
-    $scope.$watchCollection('all', function(newValue, oldValue) {
-      localStorageService.set('todolist', $scope.all)
-    })
-
-    $scope.addActivity = function() {
-      $scope.all.push($scope.newActivity)
-      $scope.newActivity = {}
-    }
-
-    $scope.cleanAll = function() {
-      $scope.all = []
-    }
+app.controller('FiltersController', [
+  '$scope',
+  function($scope) {
+    $scope.myHTML = '<h1>Hello World</h1>'
+    $scope.myJSON = {}
+    $scope.myJSON.title = 'Some title'
+    $scope.myJSON.body = 'Some body'
+    $scope.myCurrency = 2
   }
 ])
