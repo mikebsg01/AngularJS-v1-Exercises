@@ -1,0 +1,21 @@
+body {
+  font-family: helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+.block {
+  display: block;
+  width: 320px;
+  border-radius: 2px;
+  margin: 5px auto 10px auto;
+  padding: 5px 15px;
+}
+
+.block-1 {
+  background-color: #F1F1F1;
+}
+
+.block-2 {
+  background-color: #CCCCCC;
+}

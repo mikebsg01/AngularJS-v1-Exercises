@@ -1,21 +1,35 @@
 var app = angular.module('MyFirstApp', [])
 
-app.controller('FirstController', function($scope) {
-  $scope.name = 'Michael';
-  $scope.newComment = {};
-  $scope.comments = [
-    {
-      comment: "Buen tutorial",
-      username: "mikebsg01"
-    },
-    {
-      comment: "I love AngularJS",
-      username: "MichaelSerrato.MX"
-    }
-  ];
+app.controller('FirstController', [
+  '$scope', '$http', 
+  function($scope, $http) {
+    $scope.posts = []
+    $scope.newPost = {};
 
-  $scope.addComment = function() {
-    $scope.comments.push($scope.newComment);
-    $scope.newComment = {};
-  };
-});
+    $http.get('http://jsonplaceholder.typicode.com/posts')
+      .then(function(res) {
+        res.data.pop()
+        console.log('GET /posts', res)
+        $scope.posts = res.data
+      },
+      function(err) {
+        alert(err)
+      })
+
+    $scope.addPost = function() {
+      $http.post('http://jsonplaceholder.typicode.com/posts', {
+        title: $scope.newPost.title,
+        body: $scope.newPost.body,
+        userId: 1
+      })
+      .then(function(res) {
+        console.log('POST /posts', res)
+        $scope.posts.push($scope.newPost)
+        $scope.newPost = {}
+      },
+      function(err) {
+        alert(err)
+      })
+    }
+  }
+])
