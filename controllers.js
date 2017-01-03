@@ -1,35 +1,26 @@
-var app = angular.module('MyFirstApp', [])
+var app = angular.module('ToDoList', ['LocalStorageModule'])
 
-app.controller('FirstController', [
-  '$scope', '$http', 
-  function($scope, $http) {
-    $scope.posts = []
-    $scope.newPost = {};
+app.controller('ToDoController', [
+  '$scope', 'localStorageService',
+  function($scope, localStorageService) {
+    $scope.all = [];
+    $scope.newActivity = {}
 
-    $http.get('http://jsonplaceholder.typicode.com/posts')
-      .then(function(res) {
-        res.data.pop()
-        console.log('GET /posts', res)
-        $scope.posts = res.data
-      },
-      function(err) {
-        alert(err)
-      })
+    if (localStorageService.get('todolist')) {
+      $scope.all = localStorageService.get('todolist')
+    }
 
-    $scope.addPost = function() {
-      $http.post('http://jsonplaceholder.typicode.com/posts', {
-        title: $scope.newPost.title,
-        body: $scope.newPost.body,
-        userId: 1
-      })
-      .then(function(res) {
-        console.log('POST /posts', res)
-        $scope.posts.push($scope.newPost)
-        $scope.newPost = {}
-      },
-      function(err) {
-        alert(err)
-      })
+    $scope.$watchCollection('all', function(newValue, oldValue) {
+      localStorageService.set('todolist', $scope.all)
+    })
+
+    $scope.addActivity = function() {
+      $scope.all.push($scope.newActivity)
+      $scope.newActivity = {}
+    }
+
+    $scope.cleanAll = function() {
+      $scope.all = []
     }
   }
 ])
