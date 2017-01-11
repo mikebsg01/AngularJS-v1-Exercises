@@ -8,7 +8,7 @@ app.controller('FirstController', [
     setTimeout(function() {
       $scope.name = 'Serrato';
       console.log($scope.name);
-      $scope.$digest();
+      $scope.$apply();
     }, 2000);
   }
 ])
