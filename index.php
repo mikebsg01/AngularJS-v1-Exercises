@@ -10,5 +10,6 @@
 </head>
 <body ng-controller="FirstController">
   <p>{{ name }}</p>
+  <button id="button">Click me</button>
 </body>
 </html>
