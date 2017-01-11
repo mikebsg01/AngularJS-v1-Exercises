@@ -6,9 +6,10 @@ app.controller('FirstController', [
     $scope.name = 'Michael';
 
     setTimeout(function() {
-      $scope.name = 'Serrato';
-      console.log($scope.name);
-      $scope.$apply();
+      $scope.$apply(function() {
+        $scope.name = 'Serrato';
+        console.log($scope.name);
+      });
     }, 2000);
   }
 ])
