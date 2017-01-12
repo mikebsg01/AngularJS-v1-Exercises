@@ -19,3 +19,18 @@ body {
 .block-2 {
   background-color: #CCCCCC;
 }
+
+/* New Styles */
+
+.animated {
+  opacity: 1;
+  max-height: auto;
+  overflow: hidden;
+  transition: all 2s;
+}
+
+.animated.ng-hide {
+  opacity: 0;
+  max-height: 0px !important;
+  display: block !important;
+}

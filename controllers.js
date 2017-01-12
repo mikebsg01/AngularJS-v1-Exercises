@@ -1,17 +1,21 @@
-var app = angular.module('mainModule', [])
+var app = angular.module('MyFirstApp', [])
 
 app.controller('FirstController', [
-  '$scope', 
-  function($scope) {
-    $scope.name = 'Michael'
+  '$scope', '$http',
+  function($scope, $http) {
+    $scope.posts = []
+    $scope.newPost = {}
+    $scope.loading = true
 
-    var $button = document.querySelector('#button')
-    
-    $button.addEventListener('click', function() {
-      $scope.$apply(function() {
-        $scope.name = 'Serrato';
-        console.log($scope.name)
+    $http.get('http://jsonplaceholder.typicode.com/posts')
+      .then(function(res) {
+        console.log(res.data)
+        $scope.posts = res.data
+        $scope.loading = false
+      },
+      function(err) {
+        console.log(err)
+        $scope.loading = false
       })
-    })
   }
 ])
