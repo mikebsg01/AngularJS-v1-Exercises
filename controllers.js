@@ -1,21 +1,12 @@
 var app = angular.module('MyFirstApp', [])
 
-app.controller('FirstController', [
-  '$scope', '$http',
-  function($scope, $http) {
-    $scope.posts = []
-    $scope.newPost = {}
-    $scope.loading = true
+app.run(function($rootScope) {
+  $rootScope.name = 'Michael'
+})
 
-    $http.get('http://jsonplaceholder.typicode.com/posts')
-      .then(function(res) {
-        console.log(res.data)
-        $scope.posts = res.data
-        $scope.loading = false
-      },
-      function(err) {
-        console.log(err)
-        $scope.loading = false
-      })
+app.controller('FirstController', [
+  '$scope',
+  function($scope) {
+    $scope.name = 'Serrato'
   }
 ])
