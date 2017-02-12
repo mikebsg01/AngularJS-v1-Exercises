@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MyFirstApp">
+<html ng-app>
 <head>
   <meta charset="utf-8">
   <title>FirstController</title>
@@ -7,29 +7,31 @@
   <script type="text/javascript" src="angular.js?v=<?php echo time(); ?>"></script>
   <script type="text/javascript" src="angular-local-storage.js?v=<?php echo time(); ?>"></script>
   <script type="text/javascript" src="controllers.js?v=<?php echo time(); ?>"></script>
+<style type="text/css">
+.hover {
+  background-color: rgb(250, 50, 50); 
+}
+
+.border {
+  border: 3px solid rgb(250, 250, 50);
+}
+
+.no-hover {
+  background-color: rgb(50, 250, 50);
+}
+
+.bg-blue {
+  background-color: rgb(50, 50, 250);
+}
+
+</style>
 </head>
-<body ng-controller="ToDoController">
-<div class="block block-2" ng-repeat="activity in ToDoActivities">
-  <p>{{ activity.description }}</p>
-  <small>{{ activity.date | date: 'short' }}<small>
-  <a href="#" ng-click="removeActivity(activity)">Delete</a>
-</div>
-<div class="block block-1">
-  <form ng-submit="addActivity()">
-    <label>Descripción</label>
-    <br>
-    <input type="text" ng-model="newActivity.description">
-    <br>
-    <br>
-    <label>Fecha</label>
-    <br>
-    <input type="datetime-local" ng-model="newActivity.date">
-    <br>
-    <br>
-    <input type="submit" value="Save Activity">
-  </form>
-  <br>
-  <button ng-click="cleanActivities()">Limpiar</button>
+<body>
+  <button ng-click="bgBlue = !bgBlue" ng-mouseover="flag = true" ng-mouseout="flag = false" ng-class="{ 'hover border': flag, 'no-hover': !flag, 'bg-blue': bgBlue }">
+    Hover me
+  </button>
+  <span ng-show="flag">&lt; Click me</span>
+  <p>{{ flag | json }}</p>
 </div>
 </body>
 </html>
