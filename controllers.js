@@ -1,5 +1,17 @@
 var app = angular.module('CustomDirective', [])
 
+app.directive('imgCircle', function() {
+  return function($scope, $element, attrs) {
+    attrs.$observe('imgCircle', function(val) {
+      $element
+        .attr({
+          'src': val
+        })
+        .addClass('circle')
+    })
+  }
+})
+
 app.controller('AppCtrl', [
   '$scope', '$http',
   function ($scope, $http) {

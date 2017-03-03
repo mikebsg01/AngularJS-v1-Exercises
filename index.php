@@ -18,7 +18,7 @@
       <ul class="collection">
         <li ng-repeat="repo in repos" class="collection-item avatar">
           <a href="{{ repo.html_url }}">
-            <img ng-src="{{ repo.owner.avatar_url }}" class="circle">
+            <img img-circle="{{ repo.owner.avatar_url }}">
           </a>
           <span class="title">{{ repo.name }}</span>
           <p>{{ repo.description }}</p>
