@@ -34,3 +34,10 @@ body {
   max-height: 0px !important;
   display: block !important;
 }
+
+.clear-input {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
