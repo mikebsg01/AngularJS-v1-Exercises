@@ -1,0 +1,23 @@
+<h1 ng-show="repos.length > 0">{{ repos.length > 0 ? repos[0].owner.login : null }}<span class="new badge" data-badge-caption="repos">{{ repos.length }}</span></h1>
+<h5>GitHub Repos</h5>
+<div class="col offset-s8 s4">
+  <form>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">search</i>
+      <input id="repo_search" type="text" my-autocomplete="repoNameList">
+      <i ng-show="repoNameSearch" class="clear-input material-icons red-text" clear-input>close</i>
+      <label for="repo_search">Buscar un repositorio</label>
+    </div>
+  </form>
+</div>
+<ul class="collection">
+  <li ng-repeat="repo in repos" ng-show="!repoNameSearch || repoNameSearch == repo.name" class="collection-item avatar">
+    <a href="{{ repo.html_url }}">
+      <img img-circle="{{ repo.owner.avatar_url }}">
+    </a>
+    <a href="#!/repo/{{ repo.name }}">
+      <span class="title">{{ repo.name }}</span>
+    </a>
+    <p>{{ repo.description }}</p>
+  </li>
+</ul>

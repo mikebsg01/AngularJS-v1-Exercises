@@ -1,10 +1,15 @@
-var app = angular.module('CustomDirective', [])
-
 app.directive('myAutocomplete', function() {
-
+  
   function link(scope, element, attrs) {
+    $(element).keyup(function() {
+      if ($(this).val() == "") {
+        scope.$apply(function() {
+          scope.repoNameSearch = null
+        })
+      }
+    })
 
-    $(element).autocomplete({
+    $.ui.autocomplete({
       source: scope.$eval(attrs.myAutocomplete),
       select: function(event, ui) {
         event.preventDefault()
@@ -17,7 +22,7 @@ app.directive('myAutocomplete', function() {
         event.preventDefault()
         $(this).val(ui.item.label)
       }
-    })
+    }, $(element))
   }
 
   return {
@@ -28,7 +33,6 @@ app.directive('myAutocomplete', function() {
 app.directive('clearInput', function() {
 
   function link(scope, element, attrs) {
-
     $(element).click(function(event) {
       event.preventDefault()
       
@@ -46,6 +50,7 @@ app.directive('clearInput', function() {
 })
 
 app.directive('imgCircle', function() {
+
   return function($scope, $element, attrs) {
     attrs.$observe('imgCircle', function(val) {
       $element
@@ -56,29 +61,3 @@ app.directive('imgCircle', function() {
     })
   }
 })
-
-app.controller('AppCtrl', [
-  '$scope', '$http',
-  function ($scope, $http) {
-    $scope.repos = []
-    $scope.repoNameList = []
-
-    $http.get('https://api.github.com/users/mikebsg01/repos')
-    .then(function(res) {
-      $scope.repos = res.data
-
-      for (i = 0; i < res.data.length; ++i) {
-        var name = res.data[i].name
-        $scope.repoNameList.push(name)
-      }
-    }, function(res) {
-      console.log(res)
-    })
-
-    $scope.optionSelected = function(val) {
-      $scope.$apply(function() {
-        $scope.repoNameSearch = val
-      })
-    }
-  }
-])
