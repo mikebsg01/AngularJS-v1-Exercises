@@ -1,30 +1,42 @@
 <!DOCTYPE html>
-<html ng-app="CustomDirective">
+<html ng-app="FinalApp">
 <head>
   <meta charset="utf-8">
-  <title>@mikebsg01 | GitHub Repos</title>
+  <title>Social App</title>
   <!-- Cascade Style Sheets included -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css?v=<?= time(); ?>">
-  <!-- JavaScript included -->
-  <script src="//code.angularjs.org/1.6.1/angular.js"></script>
-  <script src="//code.angularjs.org/1.6.1/angular-route.js"></script>
-  <script src="//code.jquery.com/jquery-latest.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-  <script src="assets/js/autocomplete-jquery-ui.js"></script>
-  <script src="assets/js/app.js?v=<?= time(); ?>"></script>
-  <script src="assets/js/directives.js?v=<?= time(); ?>"></script>
-  <script src="assets/js/controllers.js?v=<?= time(); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/mdi/materialdesignicons.min.css?v=<?=time()?>">
+  <link rel="stylesheet" type="text/css" href="assets/css/lumx.css?v=<?=time()?>">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css?v=<?=time()?>">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <!-- JavaScript files included -->
+  <script type="text/javascript" src="assets/js/jquery.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/angular.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/angular-resource.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/angular-route.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/velocity.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/moment-with-locales.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/lumx.min.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/app.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/services.js?v=<?=time()?>"></script>
+  <script type="text/javascript" src="assets/js/controllers.js?v=<?=time()?>"></script>
 </head>
 <body>
-<div class="container" ng-cloak>
-  <div class="row">
-    <div class="col s12">
-      <div ng-view></div>
+  <nav>
+    <div class="app-navbar bgc-white tc-pink-500 card" flex-container="row" flex-align="center center">
+      <div flex-item="6">
+        <h1 class="fs-display-2 display-block">Social App</h1>
+      </div>
+      <div flex-item="1">
+        <a href="#!/">Home</a>
+      </div>
+      <div flex-item="1">
+        <a href="#!/posts/new">Create Post</a>
+      </div>
+    </div>
+  </nav>
+  <div class="top-space" flex-container="row" flex-align="center">
+    <div ng-view flex-item="8">
     </div>
   </div>
-</div>
 </body>
 </html>

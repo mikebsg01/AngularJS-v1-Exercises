@@ -1,39 +1,68 @@
-app.controller('ReposController', [
-  '$scope', '$http', '$routeParams',
-  function ($scope, $http, $routeParams) {
-    var url = 'https://api.github.com/',
-        repoName = null
+app.controller('MainController', [
+  '$scope', '$resource', 'PostResource',
+  function($scope, $resource, PostResource) {
+    var User = $resource("http://jsonplaceholder.typicode.com/users/:id",  { id: "@id" })
 
-    if (typeof $routeParams.name !== "undefined" && $routeParams.name != "") {
-      $scope.repo = {}
-      repoName = $routeParams.name
-      url += 'repos/mikebsg01/' + repoName
-    } else {
-      $scope.repos = []
-      $scope.repoNameList = []
-      url += 'users/mikebsg01/repos'
-    }
+    $scope.posts = PostResource.query()
+    $scope.users = User.query()
 
-    $http.get(url)
-    .then(function(res) {
-      if (!repoName) {
-        $scope.repos = res.data
-
-        for (i = 0; i < res.data.length; ++i) {
-          var name = res.data[i].name
-          $scope.repoNameList.push(name)
-        }
-      } else {
-        $scope.repo = res.data
+    $scope.removePost = function(post) {
+      if (confirm("Are your sure to do this operation?")) {
+        PostResource.delete({
+          id: post.id
+        }, function(data) {
+          console.log("Deleted post: ", data)
+          $scope.posts = $scope.posts.filter(function(element) {
+            return element.id !== post.id
+          })
+        })
       }
-    }, function(res) {
-      console.log(res)
+    }
+  }
+])
+
+app.controller('PostController', [
+  '$scope', '$routeParams', '$location', 'PostResource',
+  function($scope, $routeParams, $location, PostResource) {
+    $scope.formTitle = "Edit Post"
+    
+    $scope.post = PostResource.get({
+      id: $routeParams.id
     })
 
-    $scope.optionSelected = function(val) {
-      $scope.$apply(function() {
-        $scope.repoNameSearch = val
+    $scope.savePost = function() {
+      PostResource.update({ 
+        id: $scope.post.id 
+      }, { 
+        data: $scope.post
+      }, function(data) {
+        console.log("Updated post: ", data)
       })
+
+      alert("The post has been updated successfully! :)")
+      $location.path("/post/" + $scope.post.id)
+    }
+  }
+])
+
+app.controller('NewPostController', [
+  '$scope', '$resource', '$location', 'PostResource',
+  function($scope, $resource, $location, PostResource) {
+    var Post = $resource("http://jsonplaceholder.typicode.com/posts/:id",  { id: "@id" })
+
+    $scope.post = {}
+    $scope.formTitle = "Create Post"
+
+    $scope.savePost = function() {
+      PostResource.save({
+        data: $scope.post
+      }, function(data) {
+        console.log("Created post: ", data)
+      })
+
+      $scope.post = {}
+      alert("The post has been created successfully! :)")
+      $location.path("/")
     }
   }
 ])

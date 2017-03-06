@@ -1,17 +1,24 @@
-app = angular.module('CustomDirective', ['ngRoute'])
+var app = angular.module("FinalApp", ["lumx", "ngRoute", "ngResource"])
 
 app.config([
-  '$routeProvider',
+  "$routeProvider",
   function($routeProvider) {
     $routeProvider
       .when("/", {
-        controller: "ReposController",
+        controller: "MainController",
         templateUrl: "templates/home.html"
       })
-      .when("/repo/:name", {
-        controller: "ReposController",
-        templateUrl: "templates/repo.html"
+      .when("/post/:id", {
+        controller: "PostController",
+        templateUrl: "templates/post.html"
       })
-      .otherwise("/")
+      .when("/posts/new", {
+        controller: "NewPostController",
+        templateUrl: "templates/post_form.html"
+      })
+      .when("/post/edit/:id", {
+        controller: "PostController",
+        templateUrl: "templates/post_form.html"
+      })
   }
 ])

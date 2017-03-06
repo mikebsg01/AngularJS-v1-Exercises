@@ -1,0 +1,23 @@
+<form ng-submit="savePost()">
+  <div class="card top-space p+">
+    <div class="fs-headline fs-display-1">
+      {{ formTitle }}
+    </div>
+    <div flex-container="column">
+      <div flex-item>
+        <lx-text-field label="Title">
+          <input type="text" ng-model="post.title">
+        </lx-text-field>
+      </div>
+      <div flex-item>
+        <lx-text-field label="Body">
+          <textarea ng-model="post.body">
+          </textarea>
+        </lx-text-field>
+      </div>
+      <div class="top-space" flex-item flex-container="row" flex-align="center">
+        <lx-button type="submit" lx-color="pink" lx-size="l">Save</lx-button>
+      </div>
+    </div>
+  </div>
+</form>

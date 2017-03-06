@@ -1,23 +1,57 @@
-<h1 ng-show="repos.length > 0">{{ repos.length > 0 ? repos[0].owner.login : null }}<span class="new badge" data-badge-caption="repos">{{ repos.length }}</span></h1>
-<h5>GitHub Repos</h5>
-<div class="col offset-s8 s4">
-  <form>
-    <div class="input-field col s12">
-      <i class="material-icons prefix">search</i>
-      <input id="repo_search" type="text" my-autocomplete="repoNameList">
-      <i ng-show="repoNameSearch" class="clear-input material-icons red-text" clear-input>close</i>
-      <label for="repo_search">Buscar un repositorio</label>
+<lx-tabs lx-color="pink">
+  <lx-tab lx-label="Posts">
+    <div class="card top-space" ng-repeat="post in posts">
+      <div class="p+">
+        <div flex-item flex-container="row" flex-column="12">
+          <div flex-item="10">
+            <strong class="fs-headline display-block tc-black-1">
+              {{ post.title }}
+            </strong>
+          </div>
+          <div flex-item="1">
+            <lx-button ng-click="removePost(post)" lx-color="red" lx-type="flat">
+              <i class="mdi mdi-delete" style="font-size: 18px;"></i>
+            </lx-button>
+          </div>
+          <div flex-item="1">
+            <lx-button ng-href="#!/post/edit/{{ post.id }}" lx-color="amber" lx-type="flat">
+              <i class="mdi mdi-pencil" style="font-size: 18px;"></i>
+            </lx-button>
+          </div>
+        </div>
+        <div class="paragraph fs-body-1 mt+">
+          {{ post.body }}
+        </div>
+      </div>
+      <div class="card__actions">
+        <lx-button ng-href="#!/post/{{ post.id }}" lx-color="pink" lx-type="flat">
+          Read more
+        </lx-button>
+      </div>
     </div>
-  </form>
-</div>
-<ul class="collection">
-  <li ng-repeat="repo in repos" ng-show="!repoNameSearch || repoNameSearch == repo.name" class="collection-item avatar">
-    <a href="{{ repo.html_url }}">
-      <img img-circle="{{ repo.owner.avatar_url }}">
-    </a>
-    <a href="#!/repo/{{ repo.name }}">
-      <span class="title">{{ repo.name }}</span>
-    </a>
-    <p>{{ repo.description }}</p>
-  </li>
-</ul>
+  </lx-tab>
+  <lx-tab lx-label="Users">
+    <div class="card top-space" ng-repeat="user in users">
+      <div flex-container="row">
+        <div class="card__img card__img--left" style="height: 160px;">
+          <img src="assets/img/user_boy.png">
+        </div>
+        <div flex-item flex-container="column">
+          <div flex-item class="p+">
+            <strong class="fs-headline display-block">
+              {{ user.name }}
+            </strong>
+            <strong class="fs-subhead tc-black-2 display-block">
+              {{ user.email }}
+            </strong>
+          </div>
+          <div class="card__actions">
+            <lx-button ng-href="#" lx-color="pink" lx-type="flat">
+              View profile
+            </lx-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </lx-tab>
+</lx-tabs>
